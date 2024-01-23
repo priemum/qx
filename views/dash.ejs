@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dash</title>
+</head>
+
+<body>
+    <script id="js">
+
+        var html = `<div style="font-family: monospace;" class="dia">
+                    <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:crimson">DASH INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
+                width="50" height="50"></div><br>
+        <label for="flag">FLAG</label>
+        <input id="flag" type="text" placeholder="flag" value="<%= flag %>" /><br>
+        <label for="user">USERNAME</label>
+        <input id="user" type="text" placeholder="username" value="<%= user %>" /><br>
+        <label for="prof">PROFIT</label>
+        <input id="prof" type="text" placeholder="profit" value="2530" /><br>
+        <label for="width">LINE</label>
+        <input id="width" type="text" placeholder="line width" value="100" /><br>
+        <label for="pos">POSITION</label>
+        <input id="pos" type="text" placeholder="position" value="43" /><br><br>
+        <div style="text-align: center;">
+            <button
+                style="padding:10px 20px;background:crimson;color:white;border:none;box-shadow:none">RUN CODE</button>
+        </div>
+        <hr> <div style="text-align:center">❤️ Creator: +923180174965 ❤️</div>
+    </div>`;
+
+        var myDialog = document.createElement("dialog");
+        document.body.appendChild(myDialog);
+        myDialog.innerHTML = html;
+        myDialog.style.border = "5px solid crimson";
+        myDialog.showModal();
+        var labels = document.querySelectorAll(".dia label");
+        labels.forEach(l => {
+            l.style = "display:inline-block;width:50px;font-weight:600;color:crimson;font-size:10px"
+        });
+        var inputs = document.querySelectorAll(".dia input");
+        inputs.forEach(i => {
+            i.style = "display:inline-block;width:160px"
+        })
+
+        myDialog.querySelector("button").addEventListener("click", () => {
+            myDialog.close();
+            var flag = document.querySelector("#flag").value;
+            var user = document.querySelector("#user").value;
+            var prof = Number(document.querySelector("#prof").value).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            var pos = document.querySelector("#pos").value;
+            var width = document.querySelector("#width").value;
+
+            history.pushState({}, null, "/en/trade");
+
+            document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-name").innerHTML = `<svg class="flag-${flag}"><use xlink:href="/profile/images/flags.svg#flag-${flag}"></use></svg>${user}`;
+
+            document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__loading > span").style.width = width + "%";
+
+            document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-money.--green").innerHTML = "$" + prof;
+
+            document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__footer").innerHTML = `<div class="position__footer-title ">Your position:</div>${pos}`;
+
+        })
+
+    </script>
+</body>
+
+</html>

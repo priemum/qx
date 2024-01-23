@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win</title>
+</head>
+
+<body>
+    <script id="js">
+
+        var html = `<div style="font-family: monospace;">
+                    <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:crimson">WIN INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
+                width="50" height="50"></div><br>
+        <label for="percent" style="display:inline-block;width:100px;font-weight:600;color:crimson;font-size:10px">PERCENTAGE</label>
+        <input id="percent" type="text" placeholder="percent" value="90" style="display:inline-block;width:120px" /><br><br>
+        <div style="text-align: center;">
+            <button
+                style="padding:10px 20px;background:crimson;color:white;border:none;box-shadow:none">RUN CODE</button>
+        </div>
+        <hr> <div style="text-align:center">❤️ Creator: +923180174965 ❤️</div>
+    </div>`;
+        var myDialog = document.createElement("dialog");
+        document.body.appendChild(myDialog);
+        myDialog.innerHTML = html;
+        myDialog.style.border = "5px solid crimson";
+        myDialog.showModal();
+        myDialog.querySelector("button").addEventListener("click", () => {
+            myDialog.close();
+
+            var trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(:first-child)");
+            trades.forEach(element => {
+                const money = element.querySelector("div > div.trades-list-item__delta");
+                const res = parseFloat(money.textContent.split(" $")[0].replace(",", "")) * (1 + (Number(document.querySelector("#percent").value) / 100));
+                money.querySelector("div").innerText = "+" +
+                    res.toLocaleString("en",
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        }) + " $";
+                money.querySelector("div").style.color = "#0faf59";
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+:root {
+    --main-color: dodgerblue;
+    --sub-color: white
+}
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3rem;
+}
+
+.letters {
+    display: flex;
+    justify-content: space-between;
+    word-wrap: break-word;
+}
+
+label {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: auto;
+    padding: 0.5rem 1rem;
+    background: var(--main-color);
+    color: var(--sub-color);
+    border: none;
+    box-shadow: none;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background: var(--main-color);
+    color: var(--sub-color);
+    border: none;
+    box-shadow: none;
+}
+
+legend {
+    color: var(--main-color)
+}
+
+fieldset {
+    font-weight: bold;
+}
+
+input {
+    outline: none !important;
+}
+
+#user {
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: var(--main-color);
+}
+
+#buttons {
+    text-align: center;
+}
+
+input[name="sig1"],
+input[name="sig2"],
+input[name="sig3"] {
+    width: 88%;
+    margin: auto;
+    display: block;
+    padding: 5px;
+}

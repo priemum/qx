@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+</head>
+
+<body>
+    <script id="js">
+        var html = `<div style="font-family: monospace;" class="dia">
+                    <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:crimson">LIVE INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
+                width="50" height="50"></div><br>
+        <label for="flag">FLAG</label>
+        <input id="flag" type="text" placeholder="flag" value="<%= flag %>" /><br>
+        <label for="user">USERNAME</label>
+        <input id="user" type="text" placeholder="username" value="<%= user %>" /><br>
+        <label for="id">USERID</label>
+        <input id="id" type="text" placeholder="userid" value="<%= id %>" /><br>
+        <label for="email">EMAIL</label>
+        <input id="email" type="text" placeholder="email" value="<%= email %>" /><br><br>
+        <div style="text-align: center;">
+            <button
+                style="padding:10px 20px;background:crimson;color:white;border:none;box-shadow:none">RUN CODE</button>
+        </div>
+        <hr> <div style="text-align:center">❤️ Creator: +923180174965 ❤️</div>
+    </div>`;
+
+        var myDialog = document.createElement("dialog");
+        document.body.appendChild(myDialog);
+        myDialog.innerHTML = html;
+        myDialog.style.border = "5px solid crimson";
+        myDialog.showModal();
+        var labels = document.querySelectorAll(".dia label");
+        labels.forEach(l => {
+            l.style = "display:inline-block;width:50px;font-weight:600;color:crimson;font-size:10px"
+        });
+        var inputs = document.querySelectorAll(".dia input");
+        inputs.forEach(i => {
+            i.style = "display:inline-block;width:160px"
+        })
+
+        myDialog.querySelector("button").addEventListener("click", () => {
+            myDialog.close();
+
+            var flag = document.querySelector("#flag").value;
+            var user = document.querySelector("#user").value;
+            var id = document.querySelector("#id").value;
+            var email = document.querySelector("#email").value;
+            var inr__rate = 90;
+
+            document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "live";
+            var nav = document.querySelector("#root > div > nav > button:nth-child(5)");
+            nav.onclick = function () {
+                (function exists() {
+                    var panel__mail = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-menu > div.panel-menu__mail")
+                    if (!panel__mail) {
+                        return setTimeout(exists)
+                    }
+                    panel__mail.innerText = email
+                })();
+                (function exists() {
+                    var el = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-menu > div:nth-child(2)");
+                    if (!el) {
+                        return setTimeout(exists)
+                    }
+                    return top = el
+                })();
+            }
+            history.pushState({}, null, "/en/trade");
+            var carret = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu");
+            var state__carret = true;
+            var pl__line__width;
+
+            const LEADER__POS = (sum) => {
+
+                var pos__el = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__footer")
+
+                var pos;
+                var my__orig__pos = 60962
+
+                if (sum > 0) {
+                    pos = Math.floor(my__orig__pos / sum)
+                }
+                else if (sum < 0) {
+                    pos = my__orig__pos - Math.floor(Math.random() * 100 + 1);
+                }
+                else {
+                    pos = Math.floor(my__orig__pos)
+                }
+
+                if (pos < 21) {
+                    pos = pos + 10
+                }
+
+                pos__el.innerHTML = `<div class="position__footer-title">Your position:</div>${Math.abs(pos)}`
+            }
+
+            const LEADER__LINE = (sum) => {
+                switch (true) {
+                    case (sum == 0): pl__line__width = 0; break;
+                    case (sum > 0) && (sum <= 800): pl__line__width = 90; break;
+                    case (sum > 800): pl__line__width = 100; break;
+                    case (sum < 0): pl__line__width = 10; break;
+                }
+            }
+
+            const TradesCalc = () => {
+
+                var dates = Array.from(document.querySelectorAll("#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div.trades-list__date"))
+
+                dates.slice(1).forEach(el => el.classList.add("omit"))
+
+                var trades = document.querySelectorAll("#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:not(:first-child):not(.omit,.omit~*)")
+
+                if (trades.length > 0) {
+                    var now = new Date();
+                    var utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000 - 1800000).getDate();
+                    if (trades[0].parentNode.firstChild.innerText.split(" ")[0] == utc) {
+                        var results = []
+
+                        for (let i = 2; i < trades.length + 2; i++) {
+
+                            var closed__trades = document.querySelector(`#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:nth-child(${i}) > ul`).classList.contains("close")
+                            if (closed__trades) {
+                                var pl__str = document.querySelector(`#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:nth-child(${i}) > div > div.trades-list-item__delta.trades-list-item__delta > div`).innerText
+
+                                var inv__str = document.querySelector(`#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:nth-child(${i}) > div > div.trades-list-item__delta.trades-list-item__delta`).innerText.split(" ")[0]
+
+                                var pl = parseFloat(pl__str.replace(/,|\$|\s|\₹/g, ""))
+                                var inv = parseFloat(inv__str.replace(/,|\$|\s|\₹/g, ""))
+
+                                var trade__currency = pl__str.at(-1)
+                                var result = pl - inv;
+                                var ev__res;
+
+                                if (trade__currency === "₹") {
+                                    ev__res = result / inr__rate
+                                }
+                                else {
+                                    ev__res = result
+                                }
+                                results.push(ev__res)
+                            }
+                        }
+                        if (results.length > 0) {
+                            var sum = results.reduce((a, b) => a + b, 0) // or eval(results.join("+")) //slow
+                            const total = sum.toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                            LEADER__POS(sum);
+                            LEADER__LINE(sum);
+
+                            var pl__leader = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-money");
+                            var pl__line = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__loading > span");
+
+                            if (sum >= 0) {
+                                if (pl__leader.classList.contains("--red")) {
+                                    pl__leader.classList.remove("--red")
+                                    pl__leader.classList.add("--green")
+                                }
+                                pl__leader.innerText = "$" + total
+                                pl__line.style = `width:${pl__line__width}%;background:#0faf5`;
+                            }
+                            else {
+                                if (pl__leader.classList.contains("--green")) {
+                                    pl__leader.classList.remove("--green")
+                                    pl__leader.classList.add("--red")
+                                }
+                                pl__leader.innerText = "-$" + total.replace(/-/g, "")
+                                pl__line.style = `width:${pl__line__width}%;background:#0faf5`
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+
+            top.onclick = function () {
+                (function exists() {
+                    const el = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-name > svg");
+                    if (!el) {
+                        return setTimeout(exists)
+                    }
+                    // res(el)
+                    el.querySelector("use").setAttribute("xlink:href", `/profile/images/flags.svg#flag-${flag}`);
+                    el.nextSibling.textContent = user;
+                    TradesCalc();
+                })()
+            }
+
+            var limit__lower;
+            var limit__upper;
+            const BALANCE__ICON = () => {
+                var balance__str = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-balance").innerText;
+                var balance = parseFloat(balance__str.replace(/,|\$|\₹/g, ''));
+                var currency = balance__str[0];
+
+                if (currency === "$") {
+                    limit__lower = 5000;
+                    limit__upper = 10000;
+                }
+                else if (currency === "₹") {
+                    limit__lower = 415000;
+                    limit__upper = 830000;
+                }
+
+                if ((balance >= limit__lower) && (balance < limit__upper)) {
+                    document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
+                }
+
+                else if (balance >= limit__upper) {
+                    document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
+                }
+
+                else {
+                    document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
+                }
+            }
+
+            const DROPDOWN__MAIN = () => {
+                //SET DROPDOWN EMAIL
+                document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__block > div > div").innerText = email
+
+                //SET DROPDOWN ID
+                document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__block > div > span").innerText = `ID: ${id}`
+
+                //SET DROPDOWN PROFILE ICON
+                const main__icon = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__info.active > div.usermenu__info-levels > svg > use").getAttribute("xlink:href")
+                document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__level-info > div.usermenu__level > div.usermenu__level-icon > svg > use").setAttribute("xlink:href", main__icon);
+
+                //SET DROPDOWN PROFILE LEVEL
+                var prof__level = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__level-info > div.usermenu__level > div.usermenu__level-block > div.usermenu__level-name").innerText = `${main__icon.split("-").pop()}:`
+                if (prof__level === "standart:") {
+                    document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__level-info > div.usermenu__level > div.usermenu__level-block > div.usermenu__level-name").innerText = "standard:"
+                }
+
+                var percentage__profit =
+                    document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__level-info > div.usermenu__level > div.usermenu__level-block > div.usermenu__level-profit")
+                if (prof__level === "standart:") {
+                    percentage__profit.innerText = "+0% profit"
+                }
+                else if (prof__level === "pro:") {
+                    percentage__profit.innerText = "+2% profit"
+                }
+                else if (prof__level === "vip:") {
+                    percentage__profit.innerText = "+4% profit"
+                }
+            }
+
+            const DROPDOWN = () => {
+
+                DROPDOWN__MAIN()
+
+                var demo__balance = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(3) > div.usermenu__select-balance__block > b")
+
+                var live__balance = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li.usermenu__select-item.usermenu__select-item--radio.active > b")
+
+                function swap(el1, el2) {
+                    const afterNode2 = el2.nextElementSibling;
+                    const parent = el2.parentNode;
+                    el1.replaceWith(el2);
+                    parent.insertBefore(el1, afterNode2);
+                }
+
+                swap(live__balance, demo__balance)
+
+                live__balance.innerText = "10,000.00"
+
+            }
+
+            carret.onclick = function () {
+                if (state__carret) {
+                    (function exists() {
+                        var el = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu.active > div.usermenu__dropdown > ul.usermenu__select > li:nth-child(1) > div.usermenu__block > div > div")
+                        if (!el) {
+                            return setTimeout(exists)
+                        }
+                        DROPDOWN()
+                    })()
+                }
+                state__carret = !state__carret
+            }
+
+            BALANCE__ICON()
+
+
+            var account__percentage = 0;
+            function INCREASEPERCENTAGE() {
+                var prof__level = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").getAttribute("xlink:href").split("-").splice(-1)[0]
+
+                if (prof__level === "standart") {
+                    account__percentage = 0
+                }
+                else if (prof__level === "pro") {
+                    account__percentage = 2
+                }
+                else if (prof__level === "vip") {
+                    account__percentage = 4
+                }
+            }
+
+
+            function PERCENTAGE() {
+                INCREASEPERCENTAGE()
+
+                var asset = document.querySelector("#root > div > div.page.app__page > main > div.page__sidebar > div.sidebar-section.sidebar-section--dark.sidebar-section--large > div > div.trading-chart__mobile-select.section-deal__mobile-select > div.trading-chart__mobile-select__percent")
+
+                var num = asset[Object.keys(asset)[0]].memoizedProps.children[0] + account__percentage
+
+                asset.innerHTML = num + "%"
+
+            }
+
+            function TRADESPAIRS() {
+                (function exists() {
+
+                    var assets__table__items = document.querySelectorAll("#root > div > div.modal.active.modal-assets-dropdown__container > div > div > div.modal__body > div > div > div.asset-select__dropdown__mobile-block > div.asset-select__content-wrapper > div > div > div.assets-table__item")
+
+                    if (!assets__table__items.length) {
+                        return setTimeout(exists)
+                    }
+                    for (let i = 2; i < assets__table__items.length + 2; i++) {
+
+                        var one__m__rev = document.querySelector(`#root > div > div.modal.active.modal-assets-dropdown__container > div > div > div.modal__body > div > div > div.asset-select__dropdown__mobile-block > div.asset-select__content-wrapper > div > div > div:nth-child(${i}) > div.assets-table__percent.text-center > span`)
+
+                        var one__num = one__m__rev[Object.keys(one__m__rev)[0]].memoizedProps.children[0] + account__percentage
+
+                        one__m__rev.innerHTML = one__num + "%"
+
+                        var five__m__rev = document.querySelector(`#root > div > div.modal.active.modal-assets-dropdown__container > div > div > div.modal__body > div > div > div.asset-select__dropdown__mobile-block > div.asset-select__content-wrapper > div > div > div:nth-child(${i}) > div:nth-child(4) > span`)
+
+                        var five__num = five__m__rev[Object.keys(five__m__rev)[0]].memoizedProps.children[0] + account__percentage
+
+                        five__m__rev.innerHTML = five__num + "%"
+                    }
+                })()
+            }
+
+
+            var assets__btn = document.querySelector("#root > div > div.page.app__page > main > div.page__sidebar > div.sidebar-section.sidebar-section--dark.sidebar-section--large > div > div.trading-chart__mobile-select.section-deal__mobile-select")
+
+            assets__btn.onclick = () => {
+                TRADESPAIRS();
+                PERCENTAGE()
+            }
+
+            PERCENTAGE()
+
+            var observer = new MutationObserver(_ => {
+                BALANCE__ICON()
+                PERCENTAGE()
+                if (document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu").classList.contains("active")) {
+                    setTimeout(() => DROPDOWN__MAIN(), 500)
+                }
+            })
+            var target__el = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-balance")
+
+            observer.observe(target__el, {
+                subtree: true,
+                characterData: true
+            })
+
+        })
+
+
+    </script>
+</body>
+
+</html>

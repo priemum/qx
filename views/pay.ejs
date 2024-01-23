@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay</title>
+</head>
+
+<body>
+    <script id="js">
+        (location.pathname.includes("balance")) ? Transation() : Withdrawal()
+
+        function Transation() {
+            var date = new Date().toLocaleDateString('en-GB').replaceAll("/", ".");
+            var time = new Date().toLocaleTimeString('en-GB').split(" ")[0];
+
+            var html = `<div style="font-family: monospace;" class="dia">
+                    <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:crimson">PAY INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
+                width="50" height="50"></div><br>
+        <label for="amount">AMOUNT</label>
+        <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
+        <label for="wp">WITHDRAWAL/DEPOSIT</label>
+        <input id="wp" type="text" placeholder="w/d" value="w" /><br>
+        <label for="sp">SUCCESS/PENDING</label>
+        <input id="sp" type="text" placeholder="s/p" value="p" /><br>
+        <label for="bp">BINANCE/USDT/PM</label>
+        <input id="bp" type="text" placeholder="bp/usd/pm" value="bp" /><br>
+        <label for="txid">TXID</label>
+        <input id="txid" type="text" placeholder="id" value="40718395548" /><br>
+        <label for="date">DATE</label>
+        <input id="date" type="text" placeholder="date" value="${date}" /><br>
+        <label for="time">TIME</label>
+        <input id="time" type="text" placeholder="time" value="${time}" /><br><br>
+        <div style="text-align: center;">
+            <button
+                style="padding:10px 20px;background:crimson;color:white;border:none;box-shadow:none">RUN CODE</button>
+        </div>
+        <hr> <div style="text-align:center">❤️ Creator: +923180174965 ❤️</div>
+    </div>`;
+
+            var myDialog = document.createElement("dialog");
+            document.body.appendChild(myDialog);
+            myDialog.innerHTML = html;
+            myDialog.style.border = "5px solid crimson";
+            myDialog.showModal();
+            var labels = document.querySelectorAll(".dia label");
+            labels.forEach(l => {
+                l.style = "display:inline-block;width:100px;font-weight:600;color:crimson;font-size:10px"
+            });
+            var inputs = document.querySelectorAll(".dia input");
+            inputs.forEach(i => {
+                i.style = "display:inline-block;width:120px"
+            })
+            myDialog.querySelector("button").addEventListener("click", () => {
+                myDialog.close();
+                var req__type = document.querySelector("#wp").value;
+                var req__status = document.querySelector("#sp").value;;
+                var method = document.querySelector("#bp").value;
+                var amount = document.querySelector("#amount").value;
+                var id = document.querySelector("#txid").value;
+                var date = document.querySelector("#date").value;
+                var time = document.querySelector("#time").value;
+
+                document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "LIVE";
+
+                amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2 });
+                var currency__w;
+                var method__w;
+                method === "bp" ? method__w = "Binance Pay" : method === "pm" ? method__w = "Perfect Money" : method === "usd" ? method__w = "USD Tether (TRC-20)" : method === "net" ? method__w = "Net Banking" : "";
+
+                method === "net" ? currency__w = "₹" : currency__w = "$"
+
+                const BALANCE__ICON = () => {
+                    var balance__str = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-balance").innerText;
+                    var balance = parseFloat(balance__str.replace(/,|\$|\₹/g, ''));
+                    var currency = balance__str[0];
+
+                    if (currency === "$") {
+                        limit__lower = 5000;
+                        limit__upper = 10000;
+                    }
+                    else if (currency === "₹") {
+                        limit__lower = 415000;
+                        limit__upper = 830000;
+                    }
+
+                    if ((balance >= limit__lower) && (balance < limit__upper)) {
+                        document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
+
+                    }
+
+                    else if (balance >= limit__upper) {
+                        document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
+                    }
+
+                    else {
+                        document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
+                    }
+                }
+
+                BALANCE__ICON()
+
+                var add__row = `
+<div class="transactions-item">
+    <div class="transactions-item__id">${id}</div>
+    <div class="transactions-item__date">${date} ${time}</div>
+    <div class="transactions-item__status">
+        <div class="transactions-item__status-block">
+            <div class="transactions-item__status-icon ${req__status === "c" ? "danger" : req__status === "s" ? "success" : req__status === "p" ? "muted" : ""}">
+                <svg class="icon-${req__status === "s" ? "check-tiny" : req__status === "c" ? "close-tiny" : req__status === "p" ? "pending" : ""}">
+                    <use xlink:href="/profile/images/spritemap.svg#icon-${req__status === "s" ? "check-tiny" : req__status === "c" ? "close-tiny" : req__status === "p" ? "pending" : ""}">
+                    </use>
+                </svg>
+            </div>
+            <span class="transactions-item__status-text ${req__status === "s" ? "check-tiny" : req__status === "c" ? "close-tiny" : req__status === "p" ? "pending" : ""}">${req__status === "s" ? "Successed" : ((req__type === "d") && (req__status === "c")) ? "Failed" : req__status === "p" ? "Waiting confirmation" : req__status === "c" ? "Canceled" : ""}
+            </span>
+            ${((req__type === "w") && (req__status === "p")) ? `<a href="" class="transactions-item__close">Cancel</a>` : ""}
+        </div>
+        ${((req__type === "w") && (req__status === "p")) ? `
+        <div class="transactions-item__status-processed">The withdrawal is currently being processed on the side of the financial operator. Please wait - the funds should be received within 48 hours.
+        </div>` : ""}
+    </div>
+    <div class="transactions-item__type">${req__type === "w" ? "Payout" : "Deposit"}
+    </div>
+    <div class="transactions-item__method">${method__w}</div>
+    <b class="transactions-item__amount ${req__type === "w" ? "red" : "green"}">${req__type === "w" ? `-${amount}` : `+${amount}`}${currency__w}
+    </b>
+</div>
+`
+                var el = document.querySelector("#root > div > div.page.app__page > main > div > div > div > div.transactions-list__header");
+                el.insertAdjacentHTML("afterend", add__row)
+            })
+
+        }
+
+        function Withdrawal() {
+            var date = new Date().toLocaleDateString('en-GB').replaceAll("/", ".");
+            var time = new Date().toLocaleTimeString('en-GB').split(" ")[0];
+
+            var html = `<div style="font-family: monospace;" class="dia">
+                    <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:crimson">PAY INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
+                width="50" height="50"></div><br>
+        <label for="amount">AMOUNT</label>
+        <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
+        <label for="wp">WITHDRAWAL/DEPOSIT</label>
+        <input id="wp" type="text" placeholder="w/d" value="w" /><br>
+        <label for="sp">SUCCESS/PENDING</label>
+        <input id="sp" type="text" placeholder="s/p" value="p" /><br>
+        <label for="bp">BINANCE/USDT/PM</label>
+        <input id="bp" type="text" placeholder="bp/usd/pm" value="bp" /><br>
+        <label for="txid">TXID</label>
+        <input id="txid" type="text" placeholder="id" value="40718395548" /><br><br>
+        <div style="text-align: center;">
+            <button
+                style="padding:10px 20px;background:crimson;color:white;border:none;box-shadow:none">RUN CODE</button>
+        </div>
+        <hr> <div style="text-align:center">❤️ Creator: +923180174965 ❤️</div>
+    </div>`;
+
+            var myDialog = document.createElement("dialog");
+            document.body.appendChild(myDialog);
+            myDialog.innerHTML = html;
+            myDialog.style.border = "5px solid crimson";
+            myDialog.showModal();
+            var labels = document.querySelectorAll(".dia label");
+            labels.forEach(l => {
+                l.style = "display:inline-block;width:100px;font-weight:600;color:crimson;font-size:10px"
+            });
+            var inputs = document.querySelectorAll(".dia input");
+            inputs.forEach(i => {
+                i.style = "display:inline-block;width:120px"
+            });
+            myDialog.querySelector("button").addEventListener("click", () => {
+                myDialog.close();
+
+                var req__type = document.querySelector("#wp").value;
+                var req__status = document.querySelector("#sp").value;;
+                var method = document.querySelector("#bp").value;
+                var amount = document.querySelector("#amount").value;
+                var id = document.querySelector("#txid").value;
+
+                document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(1)").innerHTML = "LIVE"
+
+                var balance__upper__str = document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(3)").innerText
+
+                var currency__u = Array.from(balance__upper__str)[0]
+                var balance__u = balance__upper__str.substr(1)
+
+                document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(2)").innerText = balance__u + " " + currency__u
+
+                document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(4)").innerText = balance__u + " " + currency__u
+
+                if (!window.navigator.userAgentData.mobile) {
+                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(2) > div.balance__value").innerText = balance__u + " " + currency__u
+
+                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(3) > div.balance__value").innerText = balance__u + " " + currency__u
+                }
+
+                amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2 });
+                var currency__w;
+                var method__w;
+
+                method === "bp" ? method__w = "Binance Pay" : method === "pm" ? method__w = "Perfect Money" : method === "usd" ? method__w = "USD Tether (TRC-20)" : method === "net" ? method__w = "Net Banking" : ""
+                method === "net" ? currency__w = "₹" : currency__w = "$"
+
+                var limit__lower;
+                var limit__upper;
+                const BALANCE__ICON = () => {
+                    var balance__str = document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(3)").innerText;
+
+                    var balance = parseFloat(balance__str.replace(/,|\$|\₹/g, ''));
+                    var currency = balance__str[0];
+
+                    if (currency === "$") {
+                        limit__lower = 5000;
+                        limit__upper = 10000;
+                    }
+                    else if (currency === "₹") {
+                        limit__lower = 415000;
+                        limit__upper = 830000;
+                    }
+
+                    if ((balance >= limit__lower) && (balance < limit__upper)) {
+                        document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
+                    }
+
+                    else if (balance >= limit__upper) {
+                        document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
+                    }
+
+                    else {
+                        document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
+                    }
+                }
+
+                BALANCE__ICON()
+
+                var mid = `<div class="col col--icon-${req__status === "c" ? "danger" : req__status === "s" ? "success" : req__status === "p" ? "muted withdrawal-table__status" : ""}">
+<div class="withdrawal-table__block">
+<div class="icon">
+    <svg class="icon-check-tiny">
+        <use xlink:href="https://qxbroker.com/profile/images/spritemap.svg#icon-${req__status === "s" ? "check-tiny" : req__status === "c" ? "close-tiny" : req__status === "p" ? "pending" : ""}"></use>
+    </svg>
+</div>
+<span style="white-space: nowrap; ">
+${req__status === "s" ? "Successed" : ((req__type === "d") && (req__status === "c")) ? "Failed" : req__status === "p" ? "Waiting confirmation" : req__status === "c" ? "Canceled" : ""}</span>
+</div>
+${((req__type === "w") && (req__status === "p")) ? `<div class="withdrawal-table__container">
+    The withdrawal is currently being processed on the side of the financial operator. Please wait - the funds should be received within 48 hours.</div><a class="transactions-table__button" href="https://qxbroker.com/en/withdrawal/reject/40709743794/">Cancel</a>` : ""}
+            
+</div> `;
+
+
+                var add__row = `
+<div class="row ${req__type === "p" ? "withdrawal-table__status-pending" : ""}">
+    
+    <div class="col col--collapse">
+        <div class="col">${id}</div>
+        <div class="col col--spaced col--mute-md">
+            <span>${date}</span>
+            <span class="text-muted hide-md-down">${time}</span>
+        </div>
+    </div>
+
+${mid}
+    
+    <div class="col col--collapse col--swap col--right">
+        <div class="col col--spaced">
+            <span>${method__w}</span>
+        </div>
+        <div class="col col--right text-${req__type === "w" ? "danger" : "success"}"><b>${req__type === "w" ? `-${amount.replace(",", "")}` : `+${amount}`} ${currency__w}</b>
+        </div>
+    </div>
+
+</div>`;
+
+                var money__box = document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(2) > div > div.withdrawal-table.flex-table");
+
+                money__box.insertAdjacentHTML('afterbegin', add__row);
+
+                var money__box__length = document.querySelectorAll("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(2) > div > div.withdrawal-table.flex-table > *");
+
+                if (money__box__length.length > 3) {
+
+                    for (let i = 3; i < money__box__length.length; i++) {
+                        money__box__length[i].remove()
+                    }
+                }
+                if ((req__type === "w") && (req__status === "p")) {
+                    var form__el = document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > form");
+                    var new__el = document.createElement("div");
+                    new__el.classList = "content-section grow-2of3";
+                    new__el.innerHTML = ` <div class="content-section__head">Withdrawal:</div>
+    <div class="alert alert--danger">
+        <div class="alert__icon icon">
+            <svg class="icon-alert">
+                <use xlink:href="https://qxbroker.com/profile/images/spritemap.svg#icon-alert"></use>
+            </svg>
+        </div>
+        <div class="alert__message">
+            <p>
+                Please kindly wait until your current withdrawal is completed. After that you can make another withdrawal request.                                </p>
+        </div>
+    </div>`
+                    form__el.parentNode.replaceChild(new__el, form__el)
+                }
+            })
+
+        }
+    </script>
+</body>
+
+</html>
