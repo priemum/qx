@@ -18,20 +18,20 @@
             var html = `<div style="font-family: monospace;" class="dia">
                     <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:dodgerblue">PAY INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
                 width="50" height="50"></div><br>
-        <label for="amount">AMOUNT</label>
-        <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
-        <label for="wp">WITHDRAWAL/DEPOSIT</label>
-        <input id="wp" type="text" placeholder="w/d" value="w" /><br>
-        <label for="sp">SUCCESS/PENDING</label>
-        <input id="sp" type="text" placeholder="s/p" value="p" /><br>
-        <label for="bp">BINANCE/USDT/PM</label>
-        <input id="bp" type="text" placeholder="bp/usd/pm" value="bp" /><br>
-        <label for="txid">TXID</label>
-        <input id="txid" type="text" placeholder="id" value="40718395548" /><br>
-        <label for="date">DATE</label>
-        <input id="date" type="text" placeholder="date" value="${date}" /><br>
-        <label for="time">TIME</label>
-        <input id="time" type="text" placeholder="time" value="${time}" /><br><br>
+        <label>AMOUNT</label>
+        <input class="amount" type="text" placeholder="Amount" value="2500" /><br>
+        <label>WITHDRAWAL/DEPOSIT</label>
+        <input class="wp" type="text" placeholder="w/d" value="w" /><br>
+        <label>SUCCESS/PENDING</label>
+        <input class="sp" type="text" placeholder="s/p" value="p" /><br>
+        <label>BINANCE/USDT/PM</label>
+        <input class="bp" type="text" placeholder="bp/usd/pm" value="bp" /><br>
+        <label>TXID</label>
+        <input class="txid" type="text" placeholder="id" value="40718395548" /><br>
+        <label>DATE</label>
+        <input class="date" type="text" placeholder="date" value="${date}" /><br>
+        <label>TIME</label>
+        <input class="time" type="text" placeholder="time" value="${time}" /><br><br>
         <div style="text-align: center;">
             <button
                 style="padding:10px 20px;background:dodgerblue;color:white;border:none;box-shadow:none">RUN CODE</button>
@@ -54,14 +54,14 @@
                 i.blur();
             })
             myDialog.querySelector("button").addEventListener("click", () => {
-                var req__type = document.querySelector("#wp").value;
-                var req__status = document.querySelector("#sp").value;;
-                var method = document.querySelector("#bp").value;
-                var amount = document.querySelector("#amount").value;
-                var id = document.querySelector("#txid").value;
-                var date = document.querySelector("#date").value;
-                var time = document.querySelector("#time").value;
                 myDialog.close();
+                var req__type = document.querySelector(".wp").value;
+                var req__status = document.querySelector(".sp").value;;
+                var method = document.querySelector(".bp").value;
+                var amount = document.querySelector(".amount").value;
+                var id = document.querySelector(".txid").value;
+                var date = document.querySelector(".date").value;
+                var time = document.querySelector(".time").value;
 
                 document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "LIVE";
 
