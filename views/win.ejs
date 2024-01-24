@@ -28,7 +28,7 @@
         myDialog.showModal();
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
-            document.querySelector("#id").blur()
+            document.querySelector("#id").blur();
             var trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(:first-child)");
             trades.forEach(element => {
                 const money = element.querySelector("div > div.trades-list-item__delta");
