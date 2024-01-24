@@ -54,7 +54,6 @@
                 i.blur();
             })
             myDialog.querySelector("button").addEventListener("click", () => {
-                myDialog.close();
                 var req__type = document.querySelector("#wp").value;
                 var req__status = document.querySelector("#sp").value;;
                 var method = document.querySelector("#bp").value;
@@ -62,6 +61,7 @@
                 var id = document.querySelector("#txid").value;
                 var date = document.querySelector("#date").value;
                 var time = document.querySelector("#time").value;
+                myDialog.close();
 
                 document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "LIVE";
 
