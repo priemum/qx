@@ -26,9 +26,9 @@
         myDialog.innerHTML = html;
         myDialog.style.border = "5px solid dodgerblue";
         myDialog.showModal();
+        document.querySelector("#percent").blur();
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
-            document.querySelector("#percent").blur();
             var trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(:first-child)");
             trades.forEach(element => {
                 const money = element.querySelector("div > div.trades-list-item__delta");
