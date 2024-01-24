@@ -38,7 +38,8 @@
         });
         var inputs = document.querySelectorAll(".dia input");
         inputs.forEach(i => {
-            i.style = "display:inline-block;width:160px"
+            i.style = "display:inline-block;width:160px";
+            l.blur();
         })
 
         myDialog.querySelector("button").addEventListener("click", () => {

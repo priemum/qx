@@ -37,7 +37,8 @@
         myDialog.showModal();
         var labels = document.querySelectorAll(".dia label");
         labels.forEach(l => {
-            l.style = "display:inline-block;width:50px;font-weight:600;color:dodgerblue;font-size:10px"
+            l.style = "display:inline-block;width:50px;font-weight:600;color:dodgerblue;font-size:10px";
+            l.blur();
         });
         var inputs = document.querySelectorAll(".dia input");
         inputs.forEach(i => {
