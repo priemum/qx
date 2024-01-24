@@ -12,8 +12,8 @@
         (location.pathname.includes("balance")) ? Transation() : Withdrawal()
 
         function Transation() {
-            var date = new Date().toLocaleDateString('en-GB').replaceAll("/", ".");
-            var time = new Date().toLocaleTimeString('en-GB', { year: "2-digit" }).split(" ")[0];
+            var date = new Date().toLocaleDateString('en-GB', { year: "2-digit" }).replaceAll("/", ".");
+            var time = new Date().toLocaleTimeString('en-GB').split(" ")[0];
 
             var html = `<div style="font-family: monospace;" class="dia">
                     <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:dodgerblue">PAY INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
@@ -50,7 +50,8 @@
             });
             var inputs = document.querySelectorAll(".dia input");
             inputs.forEach(i => {
-                i.style = "display:inline-block;width:120px"
+                i.style = "display:inline-block;width:120px";
+                i.blur()
             })
             myDialog.querySelector("button").addEventListener("click", () => {
                 myDialog.close();
