@@ -12,6 +12,13 @@
         (location.pathname.includes("balance")) ? Transation() : Withdrawal()
 
         function Transation() {
+            document.querySelector(".wp").value = "";
+            document.querySelector(".sp").value = "";
+            document.querySelector(".bp").value = "";
+            document.querySelector(".amount").value = "";
+            document.querySelector(".txid").value = "";
+            document.querySelector(".date").value = "";
+            document.querySelector(".time").value = "";
             var date = new Date().toLocaleDateString('en-GB', { month: "2-digit", day: "2-digit", year: "2-digit" }).replaceAll("/", ".");
             var time = new Date().toLocaleTimeString('en-GB').split(" ")[0];
 
