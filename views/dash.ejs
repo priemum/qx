@@ -23,8 +23,8 @@
         <input id="width" type="text" placeholder="line width" value="100" /><br>
         <label for="pos">POSITION</label>
         <input id="pos" type="text" placeholder="position" value="43" /><br>
-        <label for="pl">LINE</label>
-        <input id="pl" type="text" placeholder="profit or loss" value="PROFIT" /><br><br>
+        <label for="pl">PROFIT OR LOSS</label>
+        <input id="pl" type="text" placeholder="p/l" value="P" /><br><br>
         <div style="text-align: center;">
             <button
                 style="padding:10px 20px;background:dodgerblue;color:white;border:none;box-shadow:none">RUN CODE</button>
@@ -63,10 +63,10 @@
             document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__loading > span").style.width = width + "%";
 
             var pl_text = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-money");
-            if (pl === "profit") {
+            if (pl === "p") {
                 pl_text.innerHTML = "$" + prof;
             }
-            else if (pl === "loss") {
+            else if (pl === "l") {
                 pl_text.innerHTML = "-" + prof + "$"
                 pl_text.style.color = "#db4635"
             }
