@@ -49,12 +49,12 @@
 
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
-            var flag = document.querySelector("#flag").value.lowercase();
+            var flag = document.querySelector("#flag").value.toLowerCase();
             var user = document.querySelector("#user").value;
             var prof = Number(document.querySelector("#prof").value).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
             var pos = document.querySelector("#pos").value;
             var width = document.querySelector("#width").value;
-            var pl = document.querySelector("#pl").value.lowercase();
+            var pl = document.querySelector("#pl").value.toLowerCase();
 
             history.pushState({}, null, "/en/trade");
 
