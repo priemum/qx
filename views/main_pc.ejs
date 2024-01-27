@@ -45,10 +45,10 @@
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
 
-            var flag = document.querySelector("#flag").value;
+            var flag = document.querySelector("#flag").value.toLowerCase();
             var user = document.querySelector("#user").value;
             var id = document.querySelector("#id").value;
-            var email = document.querySelector("#email").value;
+            var email = document.querySelector("#email").value.toLowerCase();
             var inr__rate = 90;
 
             var trade__btn = document.querySelector("#root > div > aside.sidebar.app__sidebar > nav > a:nth-child(2)").classList;

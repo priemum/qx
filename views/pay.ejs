@@ -21,11 +21,11 @@
         <label for="amount">AMOUNT</label>
         <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
         <label for="wp">WITHDRAWAL/DEPOSIT</label>
-        <input id="wp" type="text" placeholder="w/d" value="w" /><br>
+        <input id="wp" type="text" placeholder="W/D" value="W" /><br>
         <label for="sp">SUCCESS/PENDING</label>
-        <input id="sp" type="text" placeholder="s/p" value="p" /><br>
-        <label for="bp">BINANCE/USDT/PM</label>
-        <input id="bp" type="text" placeholder="bp/usd/pm" value="bp" /><br>
+        <input id="sp" type="text" placeholder="S/P" value="P" /><br>
+        <label for="bp">BINANCE/USD/PM</label>
+        <input id="bp" type="text" placeholder="BP/USD/PM" value="BP" /><br>
         <label for="txid">TXID</label>
         <input id="txid" type="text" placeholder="id" value="40718395548" /><br>
         <label for="date">DATE</label>
@@ -55,9 +55,9 @@
             })
             myDialog.querySelector("button").addEventListener("click", () => {
                 myDialog.close();
-                var req__type = document.querySelector("#wp").value;
-                var req__status = document.querySelector("#sp").value;;
-                var method = document.querySelector("#bp").value;
+                var req__type = document.querySelector("#wp").value.toLowerCase();
+                var req__status = document.querySelector("#sp").value.toLowerCase();
+                var method = document.querySelector("#bp").value.toLowerCase();
                 var amount = document.querySelector("#amount").value;
                 var id = document.querySelector("#txid").value;
                 var date = document.querySelector("#date").value;
@@ -145,11 +145,11 @@
         <label for="amount">AMOUNT</label>
         <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
         <label for="wp">WITHDRAWAL/DEPOSIT</label>
-        <input id="wp" type="text" placeholder="w/d" value="w" /><br>
+        <input id="wp" type="text" placeholder="W/D" value="W" /><br>
         <label for="sp">SUCCESS/PENDING</label>
-        <input id="sp" type="text" placeholder="s/p" value="p" /><br>
+        <input id="sp" type="text" placeholder="S/P" value="P" /><br>
         <label for="bp">BINANCE/USDT/PM</label>
-        <input id="bp" type="text" placeholder="bp/usd/pm" value="bp" /><br>
+        <input id="bp" type="text" placeholder="BP/USD/PM" value="BP" /><br>
         <label for="txid">TXID</label>
         <input id="txid" type="text" placeholder="id" value="40718395548" /><br><br>
         <div style="text-align: center;">
@@ -176,9 +176,9 @@
             myDialog.querySelector("button").addEventListener("click", () => {
                 myDialog.close();
 
-                var req__type = document.querySelector("#wp").value;
-                var req__status = document.querySelector("#sp").value;;
-                var method = document.querySelector("#bp").value;
+                var req__type = document.querySelector("#wp").value.toLowerCase();
+                var req__status = document.querySelector("#sp").value.toLowerCase();
+                var method = document.querySelector("#bp").value.toLowerCase();
                 var amount = document.querySelector("#amount").value;
                 var id = document.querySelector("#txid").value;
 

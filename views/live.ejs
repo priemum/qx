@@ -45,10 +45,10 @@
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
 
-            var flag = document.querySelector("#flag").value;
+            var flag = document.querySelector("#flag").value.toLowerCase();
             var user = document.querySelector("#user").value;
             var id = document.querySelector("#id").value;
-            var email = document.querySelector("#email").value;
+            var email = document.querySelector("#email").value.toLowerCase();
             var inr__rate = 90;
 
             document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "live";
