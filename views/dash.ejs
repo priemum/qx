@@ -17,12 +17,14 @@
         <input id="flag" type="text" placeholder="flag" value="<%= flag %>" /><br>
         <label for="user">USERNAME</label>
         <input id="user" type="text" placeholder="username" value="<%= user %>" /><br>
-        <label for="prof">PROFIT</label>
-        <input id="prof" type="text" placeholder="profit" value="2530" /><br>
+        <label for="prof">AMOUNT</label>
+        <input id="prof" type="text" placeholder="amount" value="2530" /><br>
         <label for="width">LINE</label>
         <input id="width" type="text" placeholder="line width" value="100" /><br>
         <label for="pos">POSITION</label>
-        <input id="pos" type="text" placeholder="position" value="43" /><br><br>
+        <input id="pos" type="text" placeholder="position" value="43" /><br>
+        <label for="pl">LINE</label>
+        <input id="pl" type="text" placeholder="profit or loss" value="p" /><br><br>
         <div style="text-align: center;">
             <button
                 style="padding:10px 20px;background:dodgerblue;color:white;border:none;box-shadow:none">RUN CODE</button>
@@ -47,11 +49,12 @@
 
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
-            var flag = document.querySelector("#flag").value;
+            var flag = document.querySelector("#flag").value.lowercase();
             var user = document.querySelector("#user").value;
             var prof = Number(document.querySelector("#prof").value).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
             var pos = document.querySelector("#pos").value;
             var width = document.querySelector("#width").value;
+            var pl = document.querySelector("#pl").value.lowercase();
 
             history.pushState({}, null, "/en/trade");
 
@@ -59,7 +62,13 @@
 
             document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__loading > span").style.width = width + "%";
 
-            document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-money.--green").innerHTML = "$" + prof;
+            var pl_text = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__header > div.position__header-money");
+            if (pl === "p") {
+                pl_text.innerHTML = "$" + prof;
+            }
+            else if (pl === "l") {
+                pl_text.innerHTML = "-" + prof + "$"
+            }
 
             document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-leader-board > div.panel-leader-board__body > div.position > div.position__footer").innerHTML = `<div class="position__footer-title ">Your position:</div>${pos}`;
 
