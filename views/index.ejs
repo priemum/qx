@@ -26,18 +26,18 @@
                 </div><br>
                 <label for="ausername">Username:</label>
                 <input type="text" id="ausername" name="username"><br><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email"><br><br>
                 <label for="userid">UserID:</label>
                 <input type="number" id="userid" name="userid"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
                 <label for="flag">Flag:</label>
                 <input type="text" id="flag" name="flag"><br><br>
                 <label for="acustom">Custom:</label>
-                <input type="text" id="acustom" name="custom">
-                <br><br><br>
-                <input type="text" name="sig1">
-                <label></label> <input type="text" name="sig2">
-                <label></label> <input type="text" name="sig3"><br><br>
+                <input type="text" id="acustom" name="custom"><br><br>
+                <div style="text-align: center;">
+                    <input type="button" class="new_sig_add" value="+">
+                </div>
+                <div class="sigs_div"></div><br>
                 <input type="submit" value="ADD">
             </fieldset>
         </form>
@@ -70,21 +70,40 @@
                         <input type="text" name="flag" value="<%= user.flag %>"><br><br>
                         <label>Custom:</label>
                         <input type="text" name="custom" value="<%= user.custom %>">
-                        <br><br><br>
-                        <input type="text" name="sig1" value="<%= user.sig[0] %>">
-                        <label></label> <input type="text" name="sig2" value="<%= user.sig[1] %>">
-                        <label></label> <input type="text" name="sig3" value="<%= user.sig[2] %>"><br><br>
-                        <input type="hidden" value="<%= user.id %>" name="id">
-                        <div id="buttons">
-                            <button type="submit" formaction="/update-member">UPDATE</button>
-                            <button id="del_btn" type="submit" formaction="/delete-member"
-                                onclick="return confirm('Are you sure you want to delete this item?');">DELETE</button>
+                        <br><br>
+                        <div style="text-align: center;">
+                            <input type="button" class="new_sig_add" value="+">
                         </div>
+                        <div class="sigs_div"></div><br>
+                        <% user.sigs.forEach((value,index)=> { %>
+                            <div style="text-align: center;">
+                                <input type="text" placeholder="Signature..." style="padding: 5px;width:82%" name="sigs"
+                                    value="<%= value %>"><input
+                                    style="width:30px;height:30px;background:black;color:white;display:inline-block;text-align:center;border: none;"
+                                    name="types" type="text" value="<%= user.types[index] %>">
+                            </div>
+                            <% }) %><br>
+                                <input type="hidden" value="<%= user.id %>" name="id">
+                                <div id="buttons">
+                                    <button type="submit" formaction="/update-member">UPDATE</button>
+                                    <button id="del_btn" type="submit" formaction="/delete-member"
+                                        onclick="return confirm('Are you sure you want to delete this item?');">DELETE</button>
+                                </div>
                     </fieldset>
                 </form>
                 <% }) %>
         </div>
     </div>
+
+    <script>
+        const btns = document.querySelectorAll(".new_sig_add");
+        btns.forEach((v, i) => {
+            v.addEventListener("click", () => {
+                var sig_HTML = `<br><input type="text" placeholder="Signature..." style="padding: 5px;width:82%" name="sigs"><input style="width:30px;height:30px;background:black;color:white;display:inline-block;text-align:center;border: none;" name="types" type="text">`;
+                var input = document.querySelectorAll(".sigs_div")[i].insertAdjacentHTML("beforeend", sig_HTML)
+            })
+        })
+    </script>
 </body>
 
 </html>

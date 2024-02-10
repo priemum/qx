@@ -70,11 +70,18 @@ input[type="checkbox"]:checked {
     text-align: center;
 }
 
-input[name="sig1"],
-input[name="sig2"],
-input[name="sig3"] {
-    width: 88%;
-    margin: auto;
-    display: block;
-    padding: 5px;
+.new_sig_add {
+    background: dodgerblue;
+    color: white;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.sigs_div {
+    text-align: center;
 }

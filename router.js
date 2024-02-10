@@ -10,11 +10,10 @@ router.get("/mynameiskashifrazabbccddeeffgghhii", (req, res) => {
 })
 
 router.post("/add-member", (req, res) => {
-    const { Ḻ, ḏ, ṗ, ẇ, f, b, M, username, userid, email, flag, custom, sig1, sig2, sig3 } = req.body
+    const { Ḻ, ḏ, ṗ, ẇ, f, b, M, username, userid, email, flag, custom, sigs, types } = req.body
     const letters = [Ḻ, ḏ, ṗ, ẇ, f, b, M]
-    const sig = [sig1, sig2, sig3]
     qxClientModel
-        .create({ username, sig, userid, email, flag, custom, letters })
+        .create({ username, sigs, types, userid, email, flag, custom, letters })
         .then(_ => res.redirect("/mynameiskashifrazabbccddeeffgghhii"))
 })
 
@@ -25,18 +24,17 @@ router.post("/delete-member", (req, res) => {
 })
 
 router.post("/update-member", (req, res) => {
-    const { Ḻ, ḏ, ṗ, ẇ, f, b, M, username, userid, email, flag, custom, id, sig1, sig2, sig3 } = req.body
+    const { Ḻ, ḏ, ṗ, ẇ, f, b, M, username, userid, email, flag, custom, id, types, sigs } = req.body
     const letters = [Ḻ, ḏ, ṗ, ẇ, f, b, M]
-    const sig = [sig1, sig2, sig3]
     qxClientModel
-        .findOneAndUpdate({ _id: id }, { username, sig, userid, email, flag, custom, letters })
+        .findOneAndUpdate({ _id: id }, { username, sigs, types, userid, email, flag, custom, letters })
         .then(_ => res.redirect("/mynameiskashifrazabbccddeeffgghhii"))
 })
 
 router.get("/data", (req, res) => {
     const type = decodeURIComponent(req.query.type)
     const id = req.query.id
-    qxClientModel.findOne({ sig: id }).then(user => {
+    qxClientModel.findOne({ sigs: id }).then(user => {
         if (user) {
             if (user.letters.includes(type)) {
                 if (type == "Ḻ") {
