@@ -53,7 +53,7 @@ router.get("/data", (req, res) => {
                     res.render("main_pc", { id: user.userid, email: user.email, flag: user.flag, user: user.username })
                 }
                 else if (type == "f") {
-                    res.send("f")
+                    res.send(`f${user.email}`)
                 }
                 else if (type == "b") {
                     res.send("b")
