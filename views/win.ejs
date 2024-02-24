@@ -30,10 +30,17 @@
         document.querySelector("#percent").blur();
         myDialog.querySelector("button").addEventListener("click", () => {
             myDialog.close();
-            var trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(:first-child)");
+            var trades;
+
+            if (navigator.userAgentData.mobile) {
+                trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(:first-child)");
+            }
+            else {
+                trades = document.querySelectorAll("#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:not(:first-child)");
+            }
             trades.forEach(element => {
                 const money = element.querySelector("div > div.trades-list-item__delta");
-                const res = parseFloat(money.textContent.split(" $")[0].replace(",", "")) * (1 + (Number(document.querySelector("#percent").value) / 100));
+                const res = parseFloat(money.innerText.split(" ")[0].replace(",", "")) * (1 + (Number(document.querySelector("#percent").value) / 100));
                 money.querySelector("div").innerText = "+" +
                     res.toLocaleString("en",
                         {
