@@ -33,10 +33,10 @@
             var trades;
 
             if (navigator.userAgentData.mobile) {
-                trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(:first-child)");
+                trades = document.querySelectorAll("#root > div > div.mobile-trade-list > div > div.deal-list__items.active > div:not(.trades-list__date)");
             }
             else {
-                trades = document.querySelectorAll("#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:not(:first-child)");
+                trades = document.querySelectorAll("#root > div > div.page.app__page > main > div.page__sidebar > div.deal-list.active > div.deal-list__items.active > div:not(.trades-list__date)");
             }
             trades.forEach(element => {
                 const money = element.querySelector("div > div.trades-list-item__delta");
