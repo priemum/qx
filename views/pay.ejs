@@ -9,8 +9,18 @@
 
 <body>
     <script id="js">
-        (location.pathname.includes("balance")) ? Transation() : Withdrawal()
-
+        var balance_str;
+        var icon;
+        if (document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dt:nth-child(3)")) {
+            icon = document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use");
+            balance_str = document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(3)");
+            Withdrawal();
+        }
+        else if (document.querySelector("#root > div > div.page.app__page > main > div > div")) {
+            icon = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use");
+            balance_str = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-balance");
+            Transation();
+        }
         function Transation() {
             var date = new Date().toLocaleDateString('en-GB', { month: "2-digit", day: "2-digit", year: "2-digit" }).replaceAll("/", ".");
             var time = new Date().toLocaleTimeString('en-GB').split(" ")[0];
@@ -18,6 +28,8 @@
             var html = `<div style="font-family: monospace;" class="dia">
                     <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:dodgerblue">PAY INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
                 width="50" height="50"></div><br>
+        <label for="bal">SET LIVE BALANCE</label>
+        <input id="bal" type="text" placeholder="set balance" value="7650.23" /><br>
         <label for="amount">AMOUNT</label>
         <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
         <label for="wp">WITHDRAWAL/DEPOSIT</label>
@@ -59,11 +71,10 @@
                 var req__status = document.querySelector("#sp").value.toLowerCase();
                 var method = document.querySelector("#bp").value.toLowerCase();
                 var amount = document.querySelector("#amount").value;
+                var bal = document.querySelector("#bal").value;
                 var id = document.querySelector("#txid").value;
                 var date = document.querySelector("#date").value;
                 var time = document.querySelector("#time").value;
-
-                document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "LIVE";
 
                 amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2 });
                 var currency__w;
@@ -72,35 +83,33 @@
 
                 method === "net" ? currency__w = "₹" : currency__w = "$"
 
-                const BALANCE__ICON = () => {
-                    var balance__str = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-balance").innerText;
-                    var balance = parseFloat(balance__str.replace(/,|\$|\₹/g, ''));
-                    var currency = balance__str[0];
+                const balance_cur = balance_str.innerText[0];
+                var balance = parseFloat(bal).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                balance_str.innerText = balance_cur + balance;
+                var limit__lower;
+                var limit__upper;
 
-                    if (currency === "$") {
-                        limit__lower = 5000;
-                        limit__upper = 10000;
-                    }
-                    else if (currency === "₹") {
-                        limit__lower = 415000;
-                        limit__upper = 830000;
-                    }
-
-                    if ((balance >= limit__lower) && (balance < limit__upper)) {
-                        document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
-
-                    }
-
-                    else if (balance >= limit__upper) {
-                        document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
-                    }
-
-                    else {
-                        document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-levels > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
-                    }
+                if (balance_cur === "$") {
+                    limit__lower = 5000;
+                    limit__upper = 10000;
+                }
+                else if (balance_cur === "₹") {
+                    limit__lower = 415000;
+                    limit__upper = 830000;
                 }
 
-                BALANCE__ICON()
+                if ((bal >= limit__lower) && (bal < limit__upper)) {
+                    icon.setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
+
+                }
+
+                else if (bal >= limit__upper) {
+                    icon.setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
+                }
+
+                else {
+                    icon.setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
+                }
 
                 var add__row = `
 <div class="transactions-item">
@@ -128,9 +137,9 @@
     <b class="transactions-item__amount ${req__type === "w" ? "red" : "green"}">${req__type === "w" ? `-${amount}` : `+${amount}`}${currency__w}
     </b>
 </div>
-`
-                var el = document.querySelector("#root > div > div.page.app__page > main > div > div > div > div.transactions-list__header");
-                el.insertAdjacentHTML("afterend", add__row)
+`;
+                var el = document.querySelector("#root > div > div.page.app__page > main > div > div > div.transactions-list__header");
+                el.insertAdjacentHTML("afterend", add__row);
             })
 
         }
@@ -142,6 +151,8 @@
             var html = `<div style="font-family: monospace;" class="dia">
                     <div style="text-align:center"><div style="line-height:50px;font-size:30px;color:dodgerblue">PAY INJECTOR</div><img src="https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.quotex.com&size=256"
                 width="50" height="50"></div><br>
+                <label for="bal">SET LIVE BALANCE</label>
+        <input id="bal" type="text" placeholder="set balance" value="7650.23" /><br>
         <label for="amount">AMOUNT</label>
         <input id="amount" type="text" placeholder="Amount" value="2500" /><br>
         <label for="wp">WITHDRAWAL/DEPOSIT</label>
@@ -180,24 +191,8 @@
                 var req__status = document.querySelector("#sp").value.toLowerCase();
                 var method = document.querySelector("#bp").value.toLowerCase();
                 var amount = document.querySelector("#amount").value;
+                var bal = document.querySelector("#bal").value;
                 var id = document.querySelector("#txid").value;
-
-                document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(1)").innerHTML = "LIVE"
-
-                var balance__upper__str = document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(3)").innerText
-
-                var currency__u = Array.from(balance__upper__str)[0]
-                var balance__u = balance__upper__str.substr(1)
-
-                document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(2)").innerText = balance__u + " " + currency__u
-
-                document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(4)").innerText = balance__u + " " + currency__u
-
-                if (!window.navigator.userAgentData.mobile) {
-                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(2) > div.balance__value").innerText = balance__u + " " + currency__u
-
-                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(3) > div.balance__value").innerText = balance__u + " " + currency__u
-                }
 
                 amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2 });
                 var currency__w;
@@ -208,35 +203,40 @@
 
                 var limit__lower;
                 var limit__upper;
-                const BALANCE__ICON = () => {
-                    var balance__str = document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-text > div:nth-child(3)").innerText;
 
-                    var balance = parseFloat(balance__str.replace(/,|\$|\₹/g, ''));
-                    var currency = balance__str[0];
+                const balance_cur = balance_str.innerText[0];
 
-                    if (currency === "$") {
-                        limit__lower = 5000;
-                        limit__upper = 10000;
-                    }
-                    else if (currency === "₹") {
-                        limit__lower = 415000;
-                        limit__upper = 830000;
-                    }
+                var balance = parseFloat(bal).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                balance_str.innerText = balance_cur + balance;
+                document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(2)").innerText = balance + " " + balance_cur;
+                document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(4)").innerText = balance + " " + balance_cur;
 
-                    if ((balance >= limit__lower) && (balance < limit__upper)) {
-                        document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
-                    }
-
-                    else if (balance >= limit__upper) {
-                        document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
-                    }
-
-                    else {
-                        document.querySelector("body > div.app__page.page > header > div.header__container > div.header__usermenu.usermenu > div.usermenu__info > div.usermenu__info-levels.js-balance-visible-usermenu > svg > use").setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
-                    }
+                if (!window.navigator.userAgentData.mobile) {
+                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(2) > div.balance__value").innerText = balance + " " + balance_cur;
+                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(3) > div.balance__value").innerText = balance + " " + balance_cur;
                 }
 
-                BALANCE__ICON()
+                if (balance_cur === "$") {
+                    limit__lower = 5000;
+                    limit__upper = 10000;
+                }
+                else if (balance_cur === "₹") {
+                    limit__lower = 415000;
+                    limit__upper = 830000;
+                }
+
+                if ((bal >= limit__lower) && (bal < limit__upper)) {
+                    icon.setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-pro");
+
+                }
+
+                else if (bal >= limit__upper) {
+                    icon.setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-vip");
+                }
+
+                else {
+                    icon.setAttribute("xlink:href", "/profile/images/spritemap.svg#icon-profile-level-standart");
+                }
 
                 var mid = `<div class="col col--icon-${req__status === "c" ? "danger" : req__status === "s" ? "success" : req__status === "p" ? "muted withdrawal-table__status" : ""}">
 <div class="withdrawal-table__block">
@@ -290,7 +290,7 @@ ${mid}
                     }
                 }
                 if ((req__type === "w") && (req__status === "p")) {
-                    var form__el = document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > form");
+                    var form__el = document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1)").children[1];
                     var new__el = document.createElement("div");
                     new__el.classList = "content-section grow-2of3";
                     new__el.innerHTML = ` <div class="content-section__head">Withdrawal:</div>
