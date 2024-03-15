@@ -51,15 +51,7 @@
             var email = document.querySelector("#email").value.toLowerCase();
             var inr__rate = 90;
 
-            var trade__btn = document.querySelector("#root > div > aside.sidebar.app__sidebar > nav > a:nth-child(2)").classList;
-            var demo__btn = document.querySelector("#root > div > aside.sidebar.app__sidebar > nav > a:nth-child(3)").classList;
             var bonus__tag = document.querySelector("#root > div > div.page.app__page > header > div.header__banner");
-            if (demo__btn.contains("active")) {
-                demo__btn.remove("active")
-            }
-            if (!trade__btn.contains("active")) {
-                trade__btn.add("active")
-            }
             if (bonus__tag) {
                 bonus__tag.remove()
             }
