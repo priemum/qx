@@ -52,23 +52,6 @@
             var inr__rate = 90;
 
             document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu > div > div.usermenu__info-text > div.usermenu__info-name").innerText = "live";
-            var nav = document.querySelector("#root > div > nav > button:nth-child(5)");
-            nav.onclick = function () {
-                (function exists() {
-                    var panel__mail = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-menu > div.panel-menu__mail")
-                    if (!panel__mail) {
-                        return setTimeout(exists)
-                    }
-                    panel__mail.innerText = email
-                })();
-                (function exists() {
-                    var el = document.querySelector("#root > div > aside.sidepanel.app__sidepanel.sidepanel__bg-black.active > div.panel-menu > div:nth-child(2)");
-                    if (!el) {
-                        return setTimeout(exists)
-                    }
-                    return top = el
-                })();
-            }
             history.pushState({}, null, "/en/trade");
             var carret = document.querySelector("#root > div > div.page.app__page > header > div.header__container > div.usermenu");
             var state__carret = true;
