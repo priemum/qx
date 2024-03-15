@@ -51,6 +51,9 @@
             var email = document.querySelector("#email").value.toLowerCase();
             var inr__rate = 90;
 
+//active trade button
+document.querySelector("#root > div > aside.sidebar.app__sidebar > nav > a.sidebar__button.open-name").classList.add("active")
+
             var bonus__tag = document.querySelector("#root > div > div.page.app__page > header > div.header__banner");
             if (bonus__tag) {
                 bonus__tag.remove()
