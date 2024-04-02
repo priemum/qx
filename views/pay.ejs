@@ -210,11 +210,8 @@
                 balance_str.innerText = balance_cur + balance;
                 document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(2)").innerText = balance + " " + balance_cur;
                 document.querySelector("#trade-page > div > div.profile__deposit.page__sections > div > div:nth-child(1) > div:nth-child(1) > div > dl > dd:nth-child(4)").innerText = balance + " " + balance_cur;
-
-                if (!window.navigator.userAgentData.mobile) {
-                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(2) > div.balance__value").innerText = balance + " " + balance_cur;
-                    document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(3) > div.balance__value").innerText = balance + " " + balance_cur;
-                }
+                document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(2) > div.balance__value").innerText = balance + " " + balance_cur;
+                document.querySelector("#trade-page > div > div.page__content-header > div:nth-child(3) > div.balance__value").innerText = balance + " " + balance_cur;
 
                 if (balance_cur === "$") {
                     limit__lower = 5000;
