@@ -76,7 +76,7 @@
                 var date = document.querySelector("#date").value;
                 var time = document.querySelector("#time").value;
 
-                amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2 });
+                amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 var currency__w;
                 var method__w;
                 method === "bp" ? method__w = "Binance Pay" : method === "pm" ? method__w = "Perfect Money" : method === "usd" ? method__w = "USD Tether (TRC-20)" : method === "net" ? method__w = "Net Banking" : "";
@@ -194,7 +194,7 @@
                 var bal = document.querySelector("#bal").value;
                 var id = document.querySelector("#txid").value;
 
-                amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2 });
+                amount = parseFloat(amount).toLocaleString("en", { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 var currency__w;
                 var method__w;
 
