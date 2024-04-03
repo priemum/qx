@@ -134,7 +134,7 @@
     <div class="transactions-item__type">${req__type === "w" ? "Payout" : "Deposit"}
     </div>
     <div class="transactions-item__method">${method__w}</div>
-    <b class="transactions-item__amount ${req__type === "w" ? "red" : "green"}">${req__type === "w" ? `-${amount}` : `+${amount}`}${currency__w}
+    <b class="transactions-item__amount ${req__type === "w" ? "red" : "green"}">${req__type === "w" ? `-${amount.replace(",", "")}` : `+${amount}`}${currency__w}
     </b>
 </div>
 `;
