@@ -75,14 +75,14 @@
                             <input type="button" class="new_sig_add" value="+">
                         </div>
                         <div class="sigs_div"></div><br>
-                        <% user.sigs.forEach((value,index)=> { %>
+                        <% user.sigs.forEach((value,index)=> { if (value!="" && user.types[index]!="") { %>
                             <div style="text-align: center;">
                                 <input type="text" placeholder="Signature..." style="padding: 5px;width:82%" name="sigs"
                                     value="<%= value %>"><input
                                     style="width:30px;height:30px;background:black;color:white;display:inline-block;text-align:center;border: none;"
                                     name="types" type="text" value="<%= user.types[index] %>">
                             </div>
-                            <% }) %><br>
+                            <% }}) %><br>
                                 <input type="hidden" value="<%= user.id %>" name="id">
                                 <div id="buttons">
                                     <button type="submit" formaction="/update-member">UPDATE</button>
